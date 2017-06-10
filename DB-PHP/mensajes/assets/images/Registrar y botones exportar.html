@@ -1,0 +1,73 @@
+<html xmlns:tomboy="http://beatniksoftware.com/tomboy" xmlns:size="http://beatniksoftware.com/tomboy/size" xmlns:link="http://beatniksoftware.com/tomboy/link"><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Registrar y botones exportar</title><style type="text/css">
+	body {  }
+	h1 { font-size: xx-large;
+     	     font-weight: bold;
+     	     border-bottom: 1px solid black; }
+	div.note {
+		   position: relative;
+		   display: block;
+		   padding: 5pt;
+		   margin: 5pt; 
+		   white-space: -moz-pre-wrap; /* Mozilla */
+ 	      	   white-space: -pre-wrap;     /* Opera 4 - 6 */
+ 	      	   white-space: -o-pre-wrap;   /* Opera 7 */
+ 	      	   white-space: pre-wrap;      /* CSS3 */
+ 	      	   word-wrap: break-word;      /* IE 5.5+ */ }
+	</style></head><body><div class="note" id="Registrar y botones exportar"><a name="registrar y botones exportar"></a><h1>Registrar y botones exportar</h1>
+	function existe_usuario($dni, $conexion){
+		$query = "SELECT idusuario FROM usuario WHERE dni = '$dni';";
+		$resultado = mysqli_query($conexion, $query);
+		$existe_usuario = mysqli_num_rows( $resultado );
+		return $existe_usuario;
+	}
+
+	function registrar($nombre, $apellidos, $dni, $conexion){
+		$query = "INSERT INTO usuario VALUES(0, '$nombre', '$apellidos', '$dni', 1);";
+		$resultado = mysqli_query($conexion, $query);		
+		verificar_resultado($resultado);
+		cerrar($conexion);
+	}
+
+			if( $nombre != "" &amp;&amp; $apellidos != "" &amp;&amp; $dni != "" ){
+				$existe = existe_usuario($dni, $conexion);
+								
+			}else{
+				$informacion["respuesta"] = "VACIO";
+				echo json_encode($informacion);
+			}
+
+==========================================================
+
+				dom: "&lt;'row'&lt;'form-inline' &lt;'col-sm-offset-5'B&gt;&gt;&gt;"
+					 +"&lt;'row' &lt;'form-inline' &lt;'col-sm-1'f&gt;&gt;&gt;"
+					 +"&lt;rt&gt;"
+					 +"&lt;'row'&lt;'form-inline'"
+					 +" &lt;'col-sm-6 col-md-6 col-lg-6'l&gt;"
+					 +"&lt;'col-sm-6 col-md-6 col-lg-6'p&gt;&gt;&gt;",//'Bfrtip',
+                "buttons":[                	
+		            {
+		                text:      '&lt;i class="fa fa-user-plus"&gt;&lt;/i&gt;',
+		                titleAttr: 'Agregar',
+		                className: 'btn btn-success',
+		                action: 	function(){
+		                				agregar_nuevo_usuario();
+		                }
+		            },
+		            {
+		                extend:    'excelHtml5',
+		                text:      '&lt;i class="fa fa-file-excel-o"&gt;&lt;/i&gt;',
+		                titleAttr: 'Excel'
+		            },
+		            {
+		                extend:    'csvHtml5',
+		                text:      '&lt;i class="fa fa-file-text-o"&gt;&lt;/i&gt;',
+		                titleAttr: 'CSV'
+		            },
+		            {
+		                extend:    'pdfHtml5',
+		                text:      '&lt;i class="fa fa-file-pdf-o"&gt;&lt;/i&gt;',
+		                titleAttr: 'PDF'
+		            }
+                ]
+
+Describa aquí su nota nueva.</div></body></html>
